@@ -499,7 +499,7 @@ function cargarPreguntaQuiz(){
 // SIGUIENTE PREGUNTA
 // ========================================
 
-function siguientePreguntaQuiz(){
+function SiguientePreguntaQuiz(){
 
     preguntaActualQuiz++;
 
