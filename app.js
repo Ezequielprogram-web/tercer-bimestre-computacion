@@ -255,3 +255,13 @@ mostrarPregunta();
 }
 
 mostrarPregunta();
+
+function mostrarSeccion(id){
+
+  document.getElementById("inicio").style.display = "none";
+  document.getElementById("flashcards").style.display = "none";
+  document.getElementById("glosario").style.display = "none";
+  document.getElementById("acerca").style.display = "none";
+
+  document.getElementById(id).style.display = "block";
+}
