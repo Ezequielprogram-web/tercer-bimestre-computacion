@@ -2,14 +2,47 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tercer Bimestre Computación</title>
 <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
+<header>
 <h1>Tercer Bimestre Computación</h1>
 <p>Creado por Ezequiel Caal</p>
-<p>El sitio usa el modo claro/oscuro predeterminado del dispositivo.</p>
+</header>
+
+<main>
+
+<section class="flashcard">
+
+<h2>Flashcards de Estudio</h2>
+
+<div class="card">
+
+<h3 id="pregunta">
+Cargando pregunta...
+</h3>
+
+<p id="respuesta"></p>
+
+<button onclick="revelarRespuesta()">
+Mostrar respuesta
+</button>
+
+<button onclick="siguiente()">
+Siguiente
+</button>
+
+</div>
+
+</section>
+
+</main>
+
 <script src="app.js"></script>
+
 </body>
 </html>
