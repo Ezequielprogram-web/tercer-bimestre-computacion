@@ -1,3 +1,7 @@
+// ========================================
+// FLASHCARDS
+// ========================================
+
 const flashcards = [
 
 {
@@ -227,225 +231,305 @@ respuesta:"Conjunto de prácticas para proteger sistemas y datos."
 
 ];
 
+
+// ========================================
+// FLASHCARDS
+// ========================================
+
 let actual = 0;
 
 function mostrarPregunta(){
-document.getElementById("pregunta").textContent =
-flashcards[actual].pregunta;
 
-document.getElementById("respuesta").textContent =
-flashcards[actual].respuesta;
+    const pregunta = document.getElementById("pregunta");
+    const respuesta = document.getElementById("respuesta");
 
-document.getElementById("respuesta").style.display="none";
+    if(!pregunta || !respuesta) return;
+
+    pregunta.textContent = flashcards[actual].pregunta;
+
+    respuesta.textContent = flashcards[actual].respuesta;
+
+    respuesta.style.display = "none";
 }
+
 
 function revelarRespuesta(){
-document.getElementById("respuesta").style.display="block";
+
+    const respuesta = document.getElementById("respuesta");
+
+    if(respuesta){
+        respuesta.style.display = "block";
+    }
 }
+
 
 function siguiente(){
 
-  actual++;
+    actual++;
 
-  if(actual >= flashcards.length){
-    actual = 0;
-  }
+    if(actual >= flashcards.length){
+        actual = 0;
+    }
 
-  mostrarPregunta();
+    mostrarPregunta();
 }
 
-mostrarPregunta();
+
+// ========================================
+// NAVEGACIÓN DEL MENÚ
+// ========================================
 
 function mostrarSeccion(id){
 
-  document.getElementById("inicio").style.display = "none";
-  document.getElementById("flashcards").style.display = "none";
-  document.getElementById("cuestionario").style.display = "none";
-  document.getElementById("glosario").style.display = "none";
-  document.getElementById("acerca").style.display = "none";
+    const secciones = [
+        "inicio",
+        "flashcards",
+        "cuestionario",
+        "glosario",
+        "acerca"
+    ];
 
-  document.getElementById(id).style.display = "block";
+    // Ocultar todas las secciones
+    secciones.forEach(function(seccion){
 
-  if(id === "cuestionario"){
+        const elemento = document.getElementById(seccion);
 
-    if(preguntasQuiz.length === 0){
-      generarQuiz();
-    }
-
-    cargarPreguntaQuiz();
-
-  }
-
-}
-
-// ================================
-// SISTEMA DEL CUESTIONARIO
-// ================================
-
-let preguntaActualQuiz = 0;
-let preguntasQuiz = [];
-
-
-// Generar automáticamente el cuestionario
-// utilizando las preguntas de las flashcards
-function generarQuiz(){
-
-  preguntasQuiz = [];
-
-  flashcards.forEach((card) => {
-
-    let opciones = [card.respuesta];
-
-    // Buscar respuestas diferentes para crear distractores
-    while(opciones.length < 4){
-
-      let aleatoria =
-        flashcards[
-          Math.floor(Math.random() * flashcards.length)
-        ].respuesta;
-
-      if(!opciones.includes(aleatoria)){
-        opciones.push(aleatoria);
-      }
-
-    }
-
-    // Mezclar las cuatro opciones
-    opciones.sort(() => Math.random() - 0.5);
-
-    preguntasQuiz.push({
-
-      pregunta: card.pregunta,
-
-      opciones: opciones,
-
-      correcta: opciones.indexOf(card.respuesta)
+        if(elemento){
+            elemento.style.display = "none";
+        }
 
     });
 
-  });
+
+    // Mostrar la sección seleccionada
+    const seleccionada = document.getElementById(id);
+
+    if(seleccionada){
+        seleccionada.style.display = "block";
+    }
+
+
+    // Si se abre el cuestionario
+    if(id === "cuestionario"){
+
+        if(preguntasQuiz.length === 0){
+            generarQuiz();
+        }
+
+        cargarPreguntaQuiz();
+
+    }
 
 }
 
 
-// Mostrar la pregunta actual
+// ========================================
+// SISTEMA DEL CUESTIONARIO
+// ========================================
+
+let preguntasQuiz = [];
+
+let preguntaActualQuiz = 0;
+
+
+// Crear automáticamente el cuestionario
+// usando las flashcards
+function generarQuiz(){
+
+    preguntasQuiz = [];
+
+    flashcards.forEach(function(card){
+
+        let opciones = [];
+
+        // La respuesta correcta
+        opciones.push(card.respuesta);
+
+
+        // Buscar respuestas diferentes
+        while(opciones.length < 4){
+
+            const aleatoria =
+                flashcards[
+                    Math.floor(
+                        Math.random() * flashcards.length
+                    )
+                ].respuesta;
+
+
+            if(!opciones.includes(aleatoria)){
+
+                opciones.push(aleatoria);
+
+            }
+
+        }
+
+
+        // Mezclar las respuestas
+        opciones.sort(function(){
+
+            return Math.random() - 0.5;
+
+        });
+
+
+        preguntasQuiz.push({
+
+            pregunta: card.pregunta,
+
+            opciones: opciones,
+
+            correcta: opciones.indexOf(card.respuesta)
+
+        });
+
+    });
+
+}
+
+
+// ========================================
+// MOSTRAR PREGUNTA DEL CUESTIONARIO
+// ========================================
+
 function cargarPreguntaQuiz(){
 
-  const q = preguntasQuiz[preguntaActualQuiz];
-
-  document.getElementById("preguntaQuiz").textContent =
-    q.pregunta;
-
-  document.getElementById("resultadoQuiz").textContent =
-    "";
-
-  document.getElementById("siguienteQuiz").style.display =
-    "none";
-
-  const contenedor =
-    document.getElementById("opcionesQuiz");
-
-  contenedor.innerHTML = "";
+    if(preguntasQuiz.length === 0){
+        return;
+    }
 
 
-  // Crear los cuatro botones de respuesta
-  q.opciones.forEach((opcion, indice) => {
-
-    const boton = document.createElement("button");
-
-    boton.textContent = opcion;
-
-    boton.onclick = function(){
-
-      // Desactivar todas las opciones después de responder
-      const botones =
-        document.querySelectorAll("#opcionesQuiz button");
-
-      botones.forEach(b => {
-        b.disabled = true;
-      });
+    const preguntaActual =
+        preguntasQuiz[preguntaActualQuiz];
 
 
-      if(indice === q.correcta){
+    const pregunta =
+        document.getElementById("preguntaQuiz");
 
-        document.getElementById("resultadoQuiz")
-          .textContent = "✅ ¡Correcto!";
+    const opciones =
+        document.getElementById("opcionesQuiz");
 
-      }else{
+    const resultado =
+        document.getElementById("resultadoQuiz");
 
-        document.getElementById("resultadoQuiz")
-          .innerHTML =
-          "❌ Incorrecto.<br><br>" +
-          "<b>Respuesta correcta:</b><br>" +
-          q.opciones[q.correcta];
-
-      }
+    const siguiente =
+        document.getElementById("siguienteQuiz");
 
 
-      document.getElementById("siguienteQuiz")
-        .style.display = "inline-block";
-
-    };
-
-    contenedor.appendChild(boton);
-
-  });
-
-}
+    if(!pregunta || !opciones){
+        return;
+    }
 
 
-// Pasar a la siguiente pregunta
-function siguienteQuiz(){
+    pregunta.textContent =
+        preguntaActual.pregunta;
 
-  preguntaActualQuiz++;
 
-  // Cuando termina todas las preguntas
-  if(preguntaActualQuiz >= preguntasQuiz.length){
+    opciones.innerHTML = "";
 
-    alert(
-      "¡Has terminado el cuestionario!\n\n" +
-      "Se volverá a iniciar con las preguntas mezcladas."
+
+    if(resultado){
+        resultado.textContent = "";
+    }
+
+
+    if(siguiente){
+        siguiente.style.display = "none";
+    }
+
+
+    // Crear las cuatro respuestas
+    preguntaActual.opciones.forEach(
+        function(opcion, indice){
+
+            const boton =
+                document.createElement("button");
+
+
+            boton.textContent = opcion;
+
+
+            boton.onclick = function(){
+
+                // Desactivar respuestas
+                const botones =
+                    opciones.querySelectorAll("button");
+
+
+                botones.forEach(function(boton){
+
+                    boton.disabled = true;
+
+                });
+
+
+                if(indice === preguntaActual.correcta){
+
+                    resultado.textContent =
+                        "✅ ¡Correcto!";
+
+                }else{
+
+                    resultado.innerHTML =
+                        "❌ Incorrecto.<br><br>" +
+                        "<b>Respuesta correcta:</b><br>" +
+                        preguntaActual.opciones[
+                            preguntaActual.correcta
+                        ];
+
+                }
+
+
+                siguiente.style.display =
+                    "inline-block";
+
+            };
+
+
+            opciones.appendChild(boton);
+
+        }
     );
 
-    preguntaActualQuiz = 0;
-
-    generarQuiz();
-
-  }
-
-  cargarPreguntaQuiz();
-
 }
 
 
-    };
+// ========================================
+// SIGUIENTE PREGUNTA
+// ========================================
 
-    contenedor.appendChild(boton);
-
-  });
-
-}
-
-
-// Pasar a la siguiente pregunta
 function siguienteQuiz(){
 
-  preguntaActualQuiz++;
+    preguntaActualQuiz++;
 
-  // Cuando termina todas las preguntas
-  if(preguntaActualQuiz >= preguntasQuiz.length){
 
-    alert(
-      "¡Has terminado el cuestionario!\n\n" +
-      "Se volverá a iniciar con las preguntas mezcladas."
-    );
+    if(
+        preguntaActualQuiz >=
+        preguntasQuiz.length
+    ){
 
-    preguntaActualQuiz = 0;
+        alert(
+            "¡Has terminado el cuestionario!"
+        );
 
-    generarQuiz();
 
-  }
+        preguntaActualQuiz = 0;
 
-  cargarPreguntaQuiz();
+
+        // Crear nuevo orden de respuestas
+        generarQuiz();
+
+    }
+
+
+    cargarPreguntaQuiz();
 
 }
+
+
+// ========================================
+// INICIAR FLASHCARDS
+// ========================================
+
+mostrarPregunta();
