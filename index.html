@@ -11,27 +11,6 @@
 
  <nav class="menu">
  <button onclick="mostrarSeccion('inicio')">🏠 Inicio</button>
-  <section id="glosario" style="display:none;">
-  <h2>📖 Glosario</h2>
-
-  <ul>
-    <li><b>Logotipo:</b> Marca formada solo por texto.</li>
-    <li><b>Isotipo:</b> Símbolo sin texto.</li>
-    <li><b>Imagotipo:</b> Texto y símbolo separables.</li>
-    <li><b>HTML:</b> Lenguaje de estructura web.</li>
-    <li><b>CSS:</b> Lenguaje de estilos.</li>
-    <li><b>JavaScript:</b> Lenguaje de programación web.</li>
-  </ul>
-</section>
-
-<section id="acerca" style="display:none;">
-  <h2>ℹ️ Acerca del Proyecto</h2>
-
-  <p>
-    Proyecto realizado por Ezequiel Caal para el curso
-    de Computación del Tercer Bimestre.
-  </p>
-</section>
  <button onclick="mostrarSeccion('flashcards')">📚 Flashcards</button>
   <button onclick="mostrarSeccion('glosario')">📖 Glosario</button>
   <button onclick="mostrarSeccion('acerca')">ℹ️ Acerca de</button>
@@ -40,10 +19,6 @@
 <section id="inicio">
   <h2>Bienvenido</h2>
   <p>Material de estudio de Computación - Tercer Bimestre.</p>
-</section>
-
-<section id="flashcards" style="display:none;">
-  <!-- Aquí queda tu sección actual de flashcards -->
 </section>
 
 <section id="glosario" style="display:none;">
@@ -69,7 +44,7 @@
 
 <main>
 
-<section class="flashcard">
+<section id="flashcards" class="flashcard" style="display:none;">
 
 <h2>📚Flashcards de Estudio</h2>
 
