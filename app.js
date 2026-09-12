@@ -245,13 +245,13 @@ document.getElementById("respuesta").style.display="block";
 
 function siguiente(){
 
-actual++;
+  actual++;
 
-if(actual>=flashcards.length){
-actual=0;
-}
+  if(actual >= flashcards.length){
+    actual = 0;
+  }
 
-mostrarPregunta();
+  mostrarPregunta();
 }
 
 mostrarPregunta();
