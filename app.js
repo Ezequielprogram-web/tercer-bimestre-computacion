@@ -414,7 +414,7 @@ function cargarPreguntaQuiz(){
         document.getElementById("resultadoQuiz");
 
     const siguiente =
-        document.getElementById("botonsiguienteQuiz");
+        document.getElementById("botonSiguienteQuiz");
 
 
     if(!pregunta || !opciones){
