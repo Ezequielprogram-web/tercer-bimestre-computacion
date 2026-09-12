@@ -78,3 +78,68 @@ button{
   width:100%;
 }
 }
+
+/* ================================
+   CUESTIONARIO
+================================ */
+
+.cuestionario{
+  max-width:800px;
+  margin:30px auto;
+}
+
+.cuestionario h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.quiz-card{
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
+  border:1px solid rgba(120,120,120,.3);
+}
+
+#preguntaQuiz{
+  font-size:1.5rem;
+  margin-bottom:25px;
+}
+
+#opcionesQuiz{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+#opcionesQuiz button{
+  width:100%;
+  text-align:left;
+}
+
+#opcionesQuiz button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+#resultadoQuiz{
+  font-size:1.2rem;
+  font-weight:bold;
+  margin:20px 0;
+  padding:10px;
+}
+
+#siguienteQuiz{
+  width:auto;
+}
+
+@media(max-width:600px){
+
+  .quiz-card{
+    padding:20px;
+  }
+
+  #preguntaQuiz{
+    font-size:1.3rem;
+  }
+
+}
