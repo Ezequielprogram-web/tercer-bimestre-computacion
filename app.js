@@ -255,7 +255,6 @@ mostrarPregunta();
 }
 
 mostrarPregunta();
-}
 
 function mostrarSeccion(id){
 
