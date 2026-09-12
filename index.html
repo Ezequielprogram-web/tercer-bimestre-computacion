@@ -9,6 +9,38 @@
 
 <body>
 
+ <nav class="menu">
+ <button onclick="mostrarSeccion('inicio')">🏠 Inicio</button>
+ <button onclick="mostrarSeccion('flashcards')">📚 Flashcards</button>
+  <button onclick="mostrarSeccion('glosario')">📖 Glosario</button>
+  <button onclick="mostrarSeccion('acerca')">ℹ️ Acerca de</button>
+</nav>
+
+<section id="inicio">
+  <h2>Bienvenido</h2>
+  <p>Material de estudio de Computación - Tercer Bimestre.</p>
+</section>
+
+<section id="flashcards" style="display:none;">
+  <!-- Aquí queda tu sección actual de flashcards -->
+</section>
+
+<section id="glosario" style="display:none;">
+  <h2>Glosario</h2>
+  <ul>
+    <li><b>HTML:</b> Lenguaje de estructura web.</li>
+    <li><b>CSS:</b> Lenguaje de estilos.</li>
+    <li><b>JavaScript:</b> Lenguaje de programación web.</li>
+    <li><b>Logo:</b> Identidad visual de una marca.</li>
+  </ul>
+</section>
+
+<section id="acerca" style="display:none;">
+  <h2>Acerca del Proyecto</h2>
+  <p>Creado por Ezequiel Caal para el curso de Computación.</p>
+</section>
+  
+
 <header>
 <h1>Tercer Bimestre Computación</h1>
 <p>Creado por Ezequiel Caal</p>
