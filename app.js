@@ -414,7 +414,7 @@ function cargarPreguntaQuiz(){
         document.getElementById("resultadoQuiz");
 
     const siguiente =
-        document.getElementById("siguienteQuiz");
+        document.getElementById("botonsiguienteQuiz");
 
 
     if(!pregunta || !opciones){
@@ -499,7 +499,7 @@ function cargarPreguntaQuiz(){
 // SIGUIENTE PREGUNTA
 // ========================================
 
-function siguienteQuiz(){
+function siguientePreguntaQuiz(){
 
     preguntaActualQuiz++;
 
@@ -533,3 +533,5 @@ function siguienteQuiz(){
 // ========================================
 
 mostrarPregunta();
+
+console.log("app.js cargando correctamente");
