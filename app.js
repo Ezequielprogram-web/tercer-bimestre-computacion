@@ -260,8 +260,192 @@ function mostrarSeccion(id){
 
   document.getElementById("inicio").style.display = "none";
   document.getElementById("flashcards").style.display = "none";
+  document.getElementById("cuestionario").style.display = "none";
   document.getElementById("glosario").style.display = "none";
   document.getElementById("acerca").style.display = "none";
 
   document.getElementById(id).style.display = "block";
+
+  if(id === "cuestionario"){
+
+    if(preguntasQuiz.length === 0){
+      generarQuiz();
+    }
+
+    cargarPreguntaQuiz();
+
+  }
+
+}
+
+// ================================
+// SISTEMA DEL CUESTIONARIO
+// ================================
+
+let preguntaActualQuiz = 0;
+let preguntasQuiz = [];
+
+
+// Generar automáticamente el cuestionario
+// utilizando las preguntas de las flashcards
+function generarQuiz(){
+
+  preguntasQuiz = [];
+
+  flashcards.forEach((card) => {
+
+    let opciones = [card.respuesta];
+
+    // Buscar respuestas diferentes para crear distractores
+    while(opciones.length < 4){
+
+      let aleatoria =
+        flashcards[
+          Math.floor(Math.random() * flashcards.length)
+        ].respuesta;
+
+      if(!opciones.includes(aleatoria)){
+        opciones.push(aleatoria);
+      }
+
+    }
+
+    // Mezclar las cuatro opciones
+    opciones.sort(() => Math.random() - 0.5);
+
+    preguntasQuiz.push({
+
+      pregunta: card.pregunta,
+
+      opciones: opciones,
+
+      correcta: opciones.indexOf(card.respuesta)
+
+    });
+
+  });
+
+}
+
+
+// Mostrar la pregunta actual
+function cargarPreguntaQuiz(){
+
+  const q = preguntasQuiz[preguntaActualQuiz];
+
+  document.getElementById("preguntaQuiz").textContent =
+    q.pregunta;
+
+  document.getElementById("resultadoQuiz").textContent =
+    "";
+
+  document.getElementById("siguienteQuiz").style.display =
+    "none";
+
+  const contenedor =
+    document.getElementById("opcionesQuiz");
+
+  contenedor.innerHTML = "";
+
+
+  // Crear los cuatro botones de respuesta
+  q.opciones.forEach((opcion, indice) => {
+
+    const boton = document.createElement("button");
+
+    boton.textContent = opcion;
+
+    boton.onclick = function(){
+
+      // Desactivar todas las opciones después de responder
+      const botones =
+        document.querySelectorAll("#opcionesQuiz button");
+
+      botones.forEach(b => {
+        b.disabled = true;
+      });
+
+
+      if(indice === q.correcta){
+
+        document.getElementById("resultadoQuiz")
+          .textContent = "✅ ¡Correcto!";
+
+      }else{
+
+        document.getElementById("resultadoQuiz")
+          .innerHTML =
+          "❌ Incorrecto.<br><br>" +
+          "<b>Respuesta correcta:</b><br>" +
+          q.opciones[q.correcta];
+
+      }
+
+
+      document.getElementById("siguienteQuiz")
+        .style.display = "inline-block";
+
+    };
+
+    contenedor.appendChild(boton);
+
+  });
+
+}
+
+
+// Pasar a la siguiente pregunta
+function siguienteQuiz(){
+
+  preguntaActualQuiz++;
+
+  // Cuando termina todas las preguntas
+  if(preguntaActualQuiz >= preguntasQuiz.length){
+
+    alert(
+      "¡Has terminado el cuestionario!\n\n" +
+      "Se volverá a iniciar con las preguntas mezcladas."
+    );
+
+    preguntaActualQuiz = 0;
+
+    generarQuiz();
+
+  }
+
+  cargarPreguntaQuiz();
+
+}
+
+
+    };
+
+    contenedor.appendChild(boton);
+
+  });
+
+}
+
+
+// Pasar a la siguiente pregunta
+function siguienteQuiz(){
+
+  preguntaActualQuiz++;
+
+  // Cuando termina todas las preguntas
+  if(preguntaActualQuiz >= preguntasQuiz.length){
+
+    alert(
+      "¡Has terminado el cuestionario!\n\n" +
+      "Se volverá a iniciar con las preguntas mezcladas."
+    );
+
+    preguntaActualQuiz = 0;
+
+    generarQuiz();
+
+  }
+
+  cargarPreguntaQuiz();
+
 }
