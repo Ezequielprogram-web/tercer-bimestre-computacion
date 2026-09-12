@@ -254,6 +254,8 @@ actual=0;
 mostrarPregunta();
 }
 
+mostrarPregunta();
+
 function mostrarSeccion(id){
 
   document.getElementById("inicio").style.display = "none";
