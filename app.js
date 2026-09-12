@@ -252,6 +252,7 @@ actual=0;
 }
 
 mostrarPregunta();
+}
 
 function mostrarSeccion(id){
 
