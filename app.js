@@ -252,7 +252,6 @@ actual=0;
 }
 
 mostrarPregunta();
-}
 
 mostrarPregunta();
 
