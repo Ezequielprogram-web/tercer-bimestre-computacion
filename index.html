@@ -12,8 +12,9 @@
  <nav class="menu">
  <button onclick="mostrarSeccion('inicio')">🏠 Inicio</button>
  <button onclick="mostrarSeccion('flashcards')">📚 Flashcards</button>
-  <button onclick="mostrarSeccion('glosario')">📖 Glosario</button>
-  <button onclick="mostrarSeccion('acerca')">ℹ️ Acerca de</button>
+ <button onclick="mostrarSeccion('cuestionario')">📝 Cuestionario</button>
+ <button onclick="mostrarSeccion('glosario')">📖 Glosario</button>
+ <button onclick="mostrarSeccion('acerca')">ℹ️ Acerca de</button>
 </nav>
 
  <section id="inicio">
@@ -28,6 +29,30 @@
 <p>
 Material de estudio de Computación - Tercer Bimestre.
 </p>
+
+ </section>
+
+ <section id="cuestionario" class="cuestionario" style="display:none;">
+
+<h2>📝 Cuestionario</h2>
+
+<div class="quiz-card">
+
+<h3 id="preguntaQuiz">
+Cargando pregunta...
+</h3>
+
+<div id="opcionesQuiz"></div>
+
+<p id="resultadoQuiz"></p>
+
+<button id="siguienteQuiz"
+onclick="siguienteQuiz()"
+style="display:none;">
+Siguiente pregunta
+</button>
+
+</div>
 
  </section>
 
