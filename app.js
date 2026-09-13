@@ -423,11 +423,6 @@ function cargarPreguntaQuiz(){
         return;
     }
 
-    document.getElementById("progresoQuiz").textContent =
-"Pregunta " +
-(preguntaActualQuiz + 1) +
-" de " +
-preguntasQuiz.length;
 
     document.getElementById("progresoQuiz").textContent =
 "Pregunta " +
