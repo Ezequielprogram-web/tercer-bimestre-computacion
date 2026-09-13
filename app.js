@@ -423,6 +423,12 @@ function cargarPreguntaQuiz(){
         return;
     }
 
+    document.getElementById("progresoQuiz").textContent =
+"Pregunta " +
+(preguntaActualQuiz + 1) +
+" de " +
+preguntasQuiz.length;
+
 
     pregunta.textContent =
         preguntaActual.pregunta;
@@ -467,7 +473,9 @@ function cargarPreguntaQuiz(){
 
 
                 if(indice === preguntaActual.correcta){
-
+                    
+                    puntos++;
+                    
                     resultado.textContent =
                         "✅ ¡Correcto!";
 
@@ -511,9 +519,18 @@ function SiguientePreguntaQuiz(){
         preguntasQuiz.length
     ){
 
-        alert(
-            "¡Has terminado el cuestionario!"
-        );
+        let porcentaje =
+Math.round(
+(puntos / preguntasQuiz.length) * 100
+);
+
+alert(
+"¡Has terminado el cuestionario!\n\n" +
+"Puntuación: " + puntos +
+" de " + preguntasQuiz.length +
+"\n\n" +
+"Porcentaje: " + porcentaje + "%"
+);
 
 
         preguntaActualQuiz = 0;
