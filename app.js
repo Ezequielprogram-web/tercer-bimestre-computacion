@@ -331,6 +331,8 @@ let preguntasQuiz = [];
 
 let preguntaActualQuiz = 0;
 
+let puntos = 0;
+
 
 // Crear automáticamente el cuestionario
 // usando las flashcards
